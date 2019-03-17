@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HUIYILUNWENMapper">
+	
+	<!--表名 -->
+	<sql id="tableName">
+		BBGL_HUIYILUNWEN
+	</sql>
+	
+	<!-- 字段 -->
+	<sql id="Field">
+		TIMING,	
+		ZUOZHE,	
+		LUNWENJI,	
+		HUIYISHIJIAN,	
+		HUIYIDIDIAN,	
+		HUIYIMINGCHENG,	
+		JUBANDANWEI,	
+		QIZHIYEMA,	
+		DIYIZUOZHE,	
+		GONGTONGDIYI,	
+		DIYITONGXUNLIANXI,	
+		DIERTONGXUN,	
+		SHUANTTOGNDUOTONG,	
+		SHUJUKUSHOULU1,	
+		SHFOUZHUCE,	
+		CEIWUJINGFEIKAHAO,	
+		JINGFEIKAFUZREN,	
+		JIGNFEIZHUANGTAI,	
+		JIJINHAO,	
+		HUIYILUNWEN_ID
+	</sql>
+	
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{TIMING},	
+		#{ZUOZHE},	
+		#{LUNWENJI},	
+		#{HUIYISHIJIAN},	
+		#{HUIYIDIDIAN},	
+		#{HUIYIMINGCHENG},	
+		#{JUBANDANWEI},	
+		#{QIZHIYEMA},	
+		#{DIYIZUOZHE},	
+		#{GONGTONGDIYI},	
+		#{DIYITONGXUNLIANXI},	
+		#{DIERTONGXUN},	
+		#{SHUANTTOGNDUOTONG},	
+		#{SHUJUKUSHOULU1},	
+		#{SHFOUZHUCE},	
+		#{CEIWUJINGFEIKAHAO},	
+		#{JINGFEIKAFUZREN},	
+		#{JIGNFEIZHUANGTAI},	
+		#{JIJINHAO},	
+		#{HUIYILUNWEN_ID}
+	</sql>
+	
+	<!-- 新增-->
+	<insert id="save" parameterType="pd">
+		insert into 
+	<include refid="tableName"></include>
+		(
+	<include refid="Field"></include>
+		) values (
+	<include refid="FieldValue"></include>
+		)
+	</insert>
+	
+	<!-- 删除-->
+	<delete id="delete" parameterType="pd">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			HUIYILUNWEN_ID = #{HUIYILUNWEN_ID}
+	</delete>
+	
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		update
+		<include refid="tableName"></include>
+		set 
+			TIMING = #{TIMING},
+			ZUOZHE = #{ZUOZHE},
+			LUNWENJI = #{LUNWENJI},
+			HUIYISHIJIAN = #{HUIYISHIJIAN},
+			HUIYIDIDIAN = #{HUIYIDIDIAN},
+			HUIYIMINGCHENG = #{HUIYIMINGCHENG},
+			JUBANDANWEI = #{JUBANDANWEI},
+			QIZHIYEMA = #{QIZHIYEMA},
+			DIYIZUOZHE = #{DIYIZUOZHE},
+			GONGTONGDIYI = #{GONGTONGDIYI},
+			DIYITONGXUNLIANXI = #{DIYITONGXUNLIANXI},
+			DIERTONGXUN = #{DIERTONGXUN},
+			SHUANTTOGNDUOTONG = #{SHUANTTOGNDUOTONG},
+			SHUJUKUSHOULU1 = #{SHUJUKUSHOULU1},
+			SHFOUZHUCE = #{SHFOUZHUCE},
+			CEIWUJINGFEIKAHAO = #{CEIWUJINGFEIKAHAO},
+			JINGFEIKAFUZREN = #{JINGFEIKAFUZREN},
+			JIGNFEIZHUANGTAI = #{JIGNFEIZHUANGTAI},
+			JIJINHAO = #{JIJINHAO},
+		HUIYILUNWEN_ID = HUIYILUNWEN_ID
+		where 
+		HUIYILUNWEN_ID = #{HUIYILUNWEN_ID}
+	</update>
+	
+	<!-- 通过ID获取数据 -->
+	<select id="findById" parameterType="pd" resultType="pd">
+		select 
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 
+			HUIYILUNWEN_ID = #{HUIYILUNWEN_ID}
+	</select>
+	
+	<!-- 列表 -->
+	<select id="datalistPage" parameterType="page" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="pd.keywords!= null and pd.keywords != ''"><!-- 关键词检索 -->
+			and
+				(
+					TIMING LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					ZUOZHE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					LUNWENJI LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					HUIYISHIJIAN LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					HUIYIDIDIAN LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					HUIYIMINGCHENG LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					JUBANDANWEI LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					QIZHIYEMA LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					DIYIZUOZHE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					GONGTONGDIYI LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					DIYITONGXUNLIANXI LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					DIERTONGXUN LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					SHUANTTOGNDUOTONG LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					SHUJUKUSHOULU1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					SHFOUZHUCE LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					CEIWUJINGFEIKAHAO LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					JINGFEIKAFUZREN LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 	
+					JIGNFEIZHUANGTAI LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					JIJINHAO LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')					
+				<!--	根据需求自己加检索条件
+					字段1 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%')
+					 or 
+					字段2 LIKE CONCAT(CONCAT('%', #{pd.keywords}),'%') 
+				-->
+				)
+		</if>
+	</select>
+	
+	<!-- 列表(全部) -->
+	<select id="listAll" parameterType="pd" resultType="pd">
+		select
+		<include refid="Field"></include>
+		from 
+		<include refid="tableName"></include>
+	</select>
+	
+	<!-- 批量删除 -->
+	<delete id="deleteAll" parameterType="String">
+		delete from
+		<include refid="tableName"></include>
+		where 
+			HUIYILUNWEN_ID in
+		<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+                 #{item}
+		</foreach>
+	</delete>
+	
+</mapper>
